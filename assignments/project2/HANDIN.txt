@@ -1,0 +1,179 @@
+Student Name #1: Joseph Lee
+Student ugrad login #1: b2y8@remote.ugrad.cs.ubc.ca
+Student ID: 34531137
+
+Student Name #2: Leon Chan
+Student ugrad login #2: c4x8@remote.ugrad.cs.ubc.ca
+Student ID: 35824119
+
+Team name (for fun!): CPSC221
+
+Acknowledgment that you understand and have followed the course's
+collaboration policy
+(http://www.ugrad.cs.ubc.ca/~cs221/current/syllabus.shtml#conduct):
+
+Signature: [Joseph Lee, Leon Chan]
+
+Submit Instructions: submit using: make handin-proj2
+
+----------------------------------------------------------------------
+
+Approximate hours on project: TODO:
+24 hours
+
+----------------------------------------------------------------------
+
+For teams, rough breakdown of work: TODO:
+
+Workload divided roughly equally
+----------------------------------------------------------------------
+
+Acknowledgment of assistance: TODO:
+
+Stackoverflow
+DLC Hours
+----------------------------------------------------------------------
+
+Questions:
+
+For the explanations, generally a sentence or two should be enough.
+Type your answers directly in this file.
+
+
+1.  Edit solve.cpp to use VectorPriorityQueue and LinkedListDict.
+How long did it take to solve the 4x4 slider puzzle?  The 5x5?
+The 6x6 (or how long did you wait before giving up)?  Also, record
+what kind of computer you ran your experiments on.
+
+LinkedListDict:
+4x4 Puzzle = real 0m0.102s
+	     user 0m0.093s
+	     sys  0m0.005s
+
+5x5 Puzzle = real 2m53.949s
+	     user 2m46.174s
+	     sys  0m1.862s
+
+6x6 Puzzle = Gave up after waiting 30 minutes
+
+Tests run on Macbook Air Mid 2013, 1.3 GHz Intel Core i5, 4GB 1600 MHz DDR3 
+
+----------------------------------------------------------------------
+
+2.  While still using VectorPriorityQueue, edit solve.cpp to use
+your AVLDict implementation.
+How long did it take to solve the 4x4, 5x5, and 6x6 slider puzzles?
+Also, record what kind of computer you ran your experiments on.
+This should be noticeably faster!
+
+AVLDict:
+4x4 Puzzle = real 0m0.059s
+	     user 0m0.028s (129 steps)
+	     sys  0m0.005s
+
+5x5 Puzzle = real 0m10.464s
+	     user 0m5.371s (551 steps)
+	     sys  0m0.034s
+
+6x6 Puzzle = real 2m39.206s
+	     user 1m43.768s (601 steps)
+	     sys  0m0.282s
+
+Tests run on Macbook Air Mid 2013, 1.3 GHz Intel Core i5, 4GB 1600 MHz DDR3 
+
+----------------------------------------------------------------------
+
+3.  For each of the 4x4, 5x5, and 6x6 slider puzzles,
+what was the average depth of the calls to find() recorded
+in the statistics reported by the program?  Is this growing
+as the puzzle size grows?
+
+4x4 Puzzle average depth: 20354/2142 = 9
+
+5x5 Puzzle average depth: 1287708/85524 = 14
+14
+6x6 Puzzle average depth: 7060694/391094 = 17
+
+YES. The depth statistics show that the average depth is growing as the size of the puzzle grows.
+
+----------------------------------------------------------------------
+
+4.  While still using VectorPriorityQueue, edit solve.cpp to use
+your LinearHashDict implementation.
+How long did it take to solve the 4x4, 5x5, and 6x6 slider puzzles?
+Also, record what kind of computer you ran your experiments on.
+How do these times compare with your AVLDict implementation?
+
+LinearHashDict:
+4x4 Puzzle = real 0m0.068s
+	     user 0m0.056s (129 steps)
+	     sys  0m0.005s
+
+5x5 Puzzle = real 0m5.073s
+	     user 0m4.966s (551 steps)
+	     sys  0m0.061s
+
+6x6 Puzzle = real 1m10.709s
+             user 1m8.818s (601 steps)
+             sys  0m0.717s
+
+The LinearHashDict finished faster than AVLDict for all three sizes for the slider puzzles.
+
+Tests run on Macbook Air Mid 2013, 1.3 GHz Intel Core i5, 4GB 1600 MHz DDR3 
+
+----------------------------------------------------------------------
+
+5.  For each of the 4x4, 5x5, and 6x6 slider puzzles,
+what was the average number of extra probes per call to find()
+recorded in the statistics reported by the program?  Is this growing
+as the puzzle size grows?
+
+4x4 average number of extra probes: 1521/2142 = 0.710084
+5x5 average number of extra probes: 61765/85506 = 0.722347
+6x6 average number of extra probes: 264409/391048 = 0.676154
+
+NO. The average number of extra probes is not growing, rather it is roughly the same for each puzzle, with the extra probes slightly decreasing when moving to the 6x6 puzzle.
+----------------------------------------------------------------------
+
+6.  While still using VectorPriorityQueue, edit solve.cpp to use
+your DoubleHashDict implementation.
+How long did it take to solve the 4x4, 5x5, and 6x6 slider puzzles?
+Also, record what kind of computer you ran your experiments on.
+How do these times compare with your LinearHashDict implementation?
+
+DoubleHashDict:
+4x4 Puzzle = real 0m0.068s
+	     user 0m0.057s
+	     sys  0m0.005s
+
+5x5 Puzzle = real 0m5.501s
+	     user 0m5.389s
+	     sys  0m0.060s
+
+6x6 Puzzle = real 1m12.703s
+	     user 1m10.759s
+	     sys  0m0.734s
+
+The runtimes for the DoubleHashDict are almost identical to the runtimes observed in LinearHashDict. There is no discernible difference.
+
+Tests run on Macbook Air Mid 2013, 1.3 GHz Intel Core i5, 4GB 1600 MHz DDR3 
+
+----------------------------------------------------------------------
+
+7.  For each of the 4x4, 5x5, and 6x6 slider puzzles,
+what was the average number of extra probes per call to find()
+recorded in the statistics reported by the program?
+How does this compare with your LinearHashDict implementation?
+Why isn't DoubleHashDict that much faster?
+
+4x4 average number of extra probes: 1227/2142 = 0.572829
+5x5 average number of extra probes: 46936/85524 = 0.548805
+6x6 average number of extra probes: 204037/391094 = 0.521708
+
+The LinearHashDict requires a few more extra probes than DoubleHashDict for all three puzzles. However, the total sum of the probe statistics for 4x4 are the same for both LinearHashDict and DoubleHashDict.
+
+Theoretically, double hashing is supposed to minimize primary clustering that is observed with linear hashing. However, since we rehash every time the load factor is greater than 1/2, we never experience a large enough load factor, leading to minimal difference in performance.
+----------------------------------------------------------------------
+
+We will be checking your implementations of AVLDict, LinearHashDict,
+and DoubleHashDict.
