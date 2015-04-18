@@ -84,11 +84,6 @@ Node* find_parent(Node* rootNode, Node* node) {
   }
 }
 
-////////////////////////////////////////////////////////////////////
-//HELPER FUNCTIONS USED TO IMPLEMENT DELETE NODE (w/2 children) ////
-////////////////////////////////////////////////////////////////////
-
-
 /**
  * Finds the maximum key in tree at 'root'
  */
@@ -112,6 +107,7 @@ Node*& predec(Node*& rootNode) {
     return maxNode(rootNode->left);
   }
 }
+
 
 /**
  * Deletes a node containing 'key' in the tree rooted at 'root'.
@@ -144,15 +140,22 @@ bool delete_node(Node*& root, KType key) {
 
 	// case 2: target has two children
 	else if (target->left != NULL && target->right != NULL) {
+		/**
+		 * THIS SECTION NEEDS TO BE IMPLEMENTED ********************
+		 *
+		 * Add the missing lines here to make the function complete. (Hint: To
+		 * remain a valid binary tree, you must replace 'target' with either
+		 * its predecessor or its successor. To make the lab more easy to test,
+		 * PLEASE USE THE PREDECESSOR.)
+		 */
+         Node*& predec_node(predec(target));
+         KType predec_key = predec_node->key;
 
-		Node*& predec_node(target);
-        KType predec_key = predec_node->key;
-
-        delete_node(target->left, predec_node->key);
+         delete_node(root, predec_node->key);
 
          target->key = predec_key;
          return true;
-	}
+    }
 
 	// case 3: target has only left child
 	else if (target->left != NULL) {
@@ -216,104 +219,128 @@ void printTree( Node * r, int d = 0 ) {
  * Returns the number of nodes in the tree rooted at root.
  */
 int numNodes( Node* root ) {
-
-	 if (root == NULL){
-	 	return 0;
-	 } 	
-	 else {
-	 	return (numNodes(root->left) + numNodes(root->right)) + 1;
-	 }
+	/**
+	 * THIS FUNCTION NEEDS TO BE IMPLEMENTED ********************
+	 */
+	if (root == NULL)
+		return 0;
+	else {
+		return 1 + numNodes(root->left) + numNodes(root->right);
+	}
 }
 
 /**
  * Returns the number of leaves in the tree rooted at root.
  */
 int numLeaves( Node* root ) {
-	
+	/**
+	 * THIS FUNCTION NEEDS TO BE IMPLEMENTED ********************
+	 */
 	if (root == NULL){
 		return 0;
 	}
-
-	if (root->left == NULL && root->right == NULL){
+	else if (root->left == NULL && root->right == NULL){
 		return 1;
 	}
 	else {
-		return (numLeaves(root->left) + numLeaves(root->right));
+		return numLeaves(root->left) + numLeaves(root->right);
 	}
 }
 
-/**i
+/**
  * Returns the height of node x.
  */
 int height( Node* x ) {
-	
+	/**
+	 * THIS FUNCTION NEEDS TO BE IMPLEMENTED ********************
+	 */
 	if (x == NULL){
 		return -1;
-
-	if ((height(x->left)) > (height(x->right))) {
-		return height(x->left) + 1;x
+	}
+	if (x->left == NULL && x->right == NULL){
+		return 0;
 	}
 	else {
-		return height(x->right) + 1;
+		int leftHeight = 1 + height(x->left);
+		int rightHeight = 1 + height(x->right);
+
+		if (leftHeight >= rightHeight){
+			return leftHeight;
+		}
+		return rightHeight;
 	}
+	return 0;
 }
 
 /**
  * Returns the depth of node x in the tree rooted at root.
  */
 int depth( Node* x , Node* root ) {
-	if (x == root) {
-		return count;
+	/**
+	 * THIS FUNCTION NEEDS TO BE IMPLEMENTED ********************
+	 */
+	if (x == root){
+		return 0;
 	}
 	if (x->key > root->key){
-		return = depth(x, root->right) +1;
+		return depth(x, root->right) + 1;
 	}
-	else {
-		return = depth(x, root->left) +1;
+	if (x->key < root->key){
+		return depth(x, root->left) + 1;
 	}
+	return 0;
 }
 
 /**
  * Traverse a tree rooted at rootNode in-order and use 'v' to visit each node.
  */
 void in_order( Node*& rootNode, int level, Visitor& v ) {
-
-	if (rootNode == NULL){ 
-		return;
-	}
-	else {
-		in_order(rootNode->left, level + 1, v);
-		v.visit(rootNode, level);
-		in_order(rootNode->right, level + 1, v);
-	}
+	/**
+	 * THIS FUNCTION NEEDS TO BE IMPLEMENTED ********************
+	 */
+	 if (rootNode == NULL){
+	 	return;
+	 }
+	 else{
+	 	in_order(rootNode->left, level + 1, v);
+	 	v.visit(rootNode, level);
+	 	in_order(rootNode->right, level + 1, v);
+	 }
 }
 
 /**
  * Traverse a tree rooted at rootNode pre-order and use 'v' to visit each node.
  */
 void pre_order( Node*& rootNode, int level, Visitor& v ) {
-	if (rootNode == NULL){
-		return;
-	}
-	else {
-		v.visit(rootNode, level);
-		pre_order(rootNode->left, level + 1, v);
-		pre_order(rootNode->right, level + 1, v);
-	}
+	/**
+	 * THIS FUNCTION NEEDS TO BE IMPLEMENTED ********************
+	 */
+	 if (rootNode == NULL){
+	 	return;
+	 }
+	 else{
+	 	v.visit(rootNode, level);
+	 	pre_order(rootNode->left, level + 1, v);
+	 	pre_order(rootNode->right, level + 1, v);
+	 }
 }
 
 /**
  * Traverse a tree rooted at rootNode post-order and use 'v' to visit each node.
  */
 void post_order( Node*& rootNode, int level, Visitor& v ) {
-	if (rootNode == NULL){
-		return;
-	}
-	else {
-		post_order(rootNode->left, level + 1, v);
-		post_order(rootNode->right, level + 1, v);
-		v.visit(rootNode, level);
-	}	
+	/**
+	 * THIS FUNCTION NEEDS TO BE IMPLEMENTED ********************
+	 */
+	 if (rootNode == NULL){
+	 	return;
+	 }
+	 else{
+	 	post_order(rootNode->left, level + 1, v);
+	 	post_order(rootNode->right, level + 1, v);
+	 	v.visit(rootNode, level);
+	 }
+
 }
 
 
