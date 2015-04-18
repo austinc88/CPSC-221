@@ -145,13 +145,13 @@ bool delete_node(Node*& root, KType key) {
 	// case 2: target has two children
 	else if (target->left != NULL && target->right != NULL) {
 
-		Node*& predec_node(predec(target));
-    KType predec_key = predec_node->key;
+		Node*& predec_node(target);
+        KType predec_key = predec_node->key;
 
-    delete_node(target->left, predec_node->key);
+        delete_node(target->left, predec_node->key);
 
-    target->key = predec_key;
-    return true;
+         target->key = predec_key;
+         return true;
 	}
 
 	// case 3: target has only left child
@@ -242,7 +242,7 @@ int numLeaves( Node* root ) {
 	}
 }
 
-/**
+/**i
  * Returns the height of node x.
  */
 int height( Node* x ) {
@@ -251,7 +251,7 @@ int height( Node* x ) {
 		return -1;
 
 	if ((height(x->left)) > (height(x->right))) {
-		return height(x->left) + 1;
+		return height(x->left) + 1;x
 	}
 	else {
 		return height(x->right) + 1;
@@ -262,17 +262,14 @@ int height( Node* x ) {
  * Returns the depth of node x in the tree rooted at root.
  */
 int depth( Node* x , Node* root ) {
-	int count = 0;
 	if (x == root) {
 		return count;
 	}
 	if (x->key > root->key){
-		count = depth(x, root->right) +1;
-		return count;
+		return = depth(x, root->right) +1;
 	}
 	else {
-		count = depth(x, root->left) +1;
-		return count;
+		return = depth(x, root->left) +1;
 	}
 }
 
